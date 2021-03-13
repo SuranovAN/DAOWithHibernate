@@ -28,7 +28,7 @@ public class MyRepository implements CommandLineRunner {
 
     private void initializeData() {
         var random = new Random();
-        IntStream.range(0, 5)
+        IntStream.range(0, 4)
                 .forEach(i -> {
                     var persons = Persons.builder()
                             .person(Person.builder().name(names.get(random.nextInt(names.size())))
@@ -42,7 +42,7 @@ public class MyRepository implements CommandLineRunner {
                 });
     }
 
-    public String getPersonsByCity(String city) {
+    public List<Persons> getPersonsByCity(String city) {
         StringBuilder resp = new StringBuilder();
 //        entityManager.createQuery("select c from Persons c where c.city_of_living=" +
 //                "'" + city + "'", Persons.class)
@@ -50,8 +50,8 @@ public class MyRepository implements CommandLineRunner {
         Query query = entityManager.createQuery("select p from Persons p where p.city_of_living=:city_of_living", Persons.class);
         query.setParameter("city_of_living", city);
         var list = query.getResultList();
-        list.forEach(i -> resp.append("<p>").append(i.toString()).append("</p></b>"));
-        return resp.toString();
+//        list.forEach(i -> resp.append("<p>").append(i.toString()).append("</p></b>"));
+        return list;
     }
 
     @Override
