@@ -18,14 +18,14 @@ public class Persons {
     @Column(nullable = false)
     private String phone_number;
     @Column(nullable = false)
-    private String city_of_living;
+    private String cityOfLiving;
 
     @Override
     public String toString() {
         return "Persons{" +
                 person +
                 ", phone_number='" + phone_number + '\'' +
-                ", city_of_living='" + city_of_living + '\'' +
+                ", city_of_living='" + cityOfLiving + '\'' +
                 '}';
     }
 }
