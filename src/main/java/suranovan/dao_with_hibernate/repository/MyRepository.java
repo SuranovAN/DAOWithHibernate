@@ -2,6 +2,7 @@ package suranovan.dao_with_hibernate.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import suranovan.dao_with_hibernate.model.Person;
@@ -21,14 +22,18 @@ public class MyRepository implements CommandLineRunner {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Autowired
-    PersonsRepository personsRepository;
+    final PersonsRepository personsRepository;
 
     private final List<String> names = List.of("Aleksey", "Andrey", "Dasha", "Masha", "Sasha");
     private final List<String> surnames = List.of("Kalinin", "Suranov", "Petrovich", "Ivanov");
     private final List<Integer> ages = List.of(21, 27, 33, 41, 55, 15);
     private final List<String> phones = List.of("985-315", "915-514", "903-145", "915-952");
     private final List<String> cities = List.of("Moscow", "Yekaterinburg", "ST-Petersburg", "Krasnodar");
+
+    public MyRepository(PersonsRepository personsRepository) {
+        this.personsRepository = personsRepository;
+    }
+
 
     private void initializeData() {
         var random = new Random();

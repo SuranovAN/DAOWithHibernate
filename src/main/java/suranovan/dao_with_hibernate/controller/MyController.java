@@ -1,6 +1,5 @@
 package suranovan.dao_with_hibernate.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +14,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/")
 public class MyController {
-    @Autowired
-    MyRepository myRepository;
-    @Autowired
-    PersonsRepository personsRepository;
+    final MyRepository myRepository;
+    final PersonsRepository personsRepository;
+
+    public MyController(MyRepository myRepository, PersonsRepository personsRepository) {
+        this.myRepository = myRepository;
+        this.personsRepository = personsRepository;
+    }
 
     @GetMapping("person/by-city")
     public List<Persons> getPersons(@RequestParam("city") String city) {
